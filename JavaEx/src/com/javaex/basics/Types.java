@@ -151,6 +151,12 @@ public class Types {
 		System.out.println("0b1101 -> " + bin);
 		System.out.println("072 -> " + oct);
 		System.out.println("0xFF -> " + hex);
+	
+		// 정수형 함수는 소수점을 출력하지 않는다. ex) int 
+		// float 함수로 정의하면 소수점이 출력 된다.
+		// 앞의 수를 float - 실수형 함수가 앞에 있을 경우에는 뒤에 숫자도 자동적으로 소수점까지 출력된다.
+		
+		
 	}
 }
 
