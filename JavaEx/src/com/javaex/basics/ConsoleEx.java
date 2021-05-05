@@ -7,9 +7,138 @@ public class ConsoleEx {
 	public static void main(String[] args) {
 		consoleOutputEx();
 		consoleInputEx();
+		stringBasic();
+		stringFormatEx();
+		multiDimArray();
+		attayCopySystem();
 		
 
 	}
+	
+	public static void multiDimArray() {
+		// 2차원 배열 new type[행수][열수]
+		// 3차원 배열 new type[면][행수][열수]
+		int[][] twoDimen = new int[5][10]; // 5행10열
+		
+		int table[][] = {
+				{1, 2, 3, 4, 5, 6, 7, 8, 9, 0},
+				{2, 3, 4, 5, 6, 7, 8, 9, 0, 1},
+				{3, 4, 5, 6, 7, 8, 9, 0, 1, 2},
+				{4, 5, 6, 7, 8, 9 ,0, 1, 2, 3},
+				{5, 6, 7 ,8, 9 ,0, 1, 2, 3, 4}
+		};  //배열의 배열
+		
+		// 배열 내부의 모든 값을 합산
+		int total = 0;
+
+		System.out.println("table 배열의 행수:" + table.length);
+		for(int row = 0; row < table.length; row;;) {
+			for(int col = 0; col < table[row].length; col++) {
+				System.out.print(table[row][col] + "\t");
+				total += table[row][col];
+			}
+			System.out.println();
+		}
+		System.out.println("총계:" + total);
+	}
+	
+	private static void attayCopySystem() {
+		// System 객체를 이용한 배열의 복사
+		int source[] {1, 2, 3};
+	}
+		 
+	private static void attayCopyFor() {
+		
+		int source[] = {1, 2, 3};
+		int target[] = new int[10];
+		
+		System.arraycopy(source, // 원본 배열의 식별자
+				0, // 복사 시작 인덱스(원본 배열의)
+				target, // 복사 대상 배열
+				3, // 복사 시작 인덱스(대상 배열의)
+				source.length);
+		
+		// 출력
+		for (int i=0; i< < target.length; i++) {
+			System.out.print(target[i] + "\t")
+		}
+		System.out.println();
+		
+		 // Enhanced For :  순차 객체로부터 값을 하나씩 추출하여 할당
+		for (int value : target) {
+			System.out.print(false)value + "\t");
+	}
+		System.out.println();
+		//연습
+		/* 
+	private static void attayCopyFor() {
+		
+		chr a[] = {t,h,i,s,i,s,a,p,e,n,c,i,l};
+		int target[] = new int[10];
+		
+		System.arraycopy(source, // 원본 배열의 식별자
+				0, // 복사 시작 인덱스(원본 배열의)
+				target, // 복사 대상 배열
+				3, // 복사 시작 인덱스(대상 배열의)
+				source.length);
+		
+		// 출력
+		for (int i=0; i< < target.length; i++) {
+			System.out.print(target[i] + "\t")
+		}
+		System.out.println();
+		
+		 // Enhanced For :  순차 객체로부터 값을 하나씩 추출하여 할당
+		for (int value : target) {
+			System.out.print(false)value + "\t");
+	}
+		System.out.println();
+	}
+	}
+	*/
+	 // 연습
+	private static void stringFormatEx() {
+		//형식화된 문자열
+		//%s,%d,%f,%n,%%
+		
+		String food = "사과";
+		int total = 10;
+		int eat = 3;
+		
+		System.out.println(total + "개의" + food + "중에서" + 
+		eat + "개를 먹었다.");
+		
+		// -> 포멧화된 출력
+		
+		System.out.println("%d개의 %s 중에서 %d 개를 먹었다%n",
+				total,food,eat);
+		// %d, %f 등의 포멧 문자에는 부가 정보를 담을 수 있다.
+		float rate = 1.234f;
+		// 현재 이자율은 __% 입니다
+		
+		System.out.printf("현재 이자율은 %f%% 입니다.%n",rate);
+		// 부가 정보로 소숫점 자릿수 직전
+		System.out.printf("현재 이자율은 %.2f%%입니다.%n", rate);
+		
+		//포멧 형식은 String.format 메서드를 이용, 문자열 생성시 활용 가능
+		String fmt = "%d 개의 %s 중에서 %d 개를 먹었다%n";
+		String trsult = String.format(fmt,5, "바나나",2);
+		String.out.println(result);
+	
+	}
+	
+	
+	private static void stringBasic() {
+		
+		String str;
+		str = "Java"
+		String str2 = "Java";
+		String str3 = new String("Java");
+		
+		System.out.println("str == str2 ?" + (str == str2));
+		System.out.println("str == str3 ?" + (str == str3));
+	}
+}
 	
 	private static void consoleInputEx() {
 		// 팁1. ctrl + Shift + O
