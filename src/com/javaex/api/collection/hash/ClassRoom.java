@@ -38,7 +38,7 @@ public class ClassRoom {
 		// 
 		if (obj instanceof ClassRoom) {
 			ClassRoom other = (ClassRoom)obj;
-			subject.equals(objother.subject) &&
+			subject.equals(other.subject) && 
 			roomName.equals(other.roomName);
 		}
 		return super.equals(obj);
