@@ -38,7 +38,7 @@ public class CharStreamEx {
 			} catch (fileNotFoundException e) {
 				System.err.println("파일을 찾을 수 업어용!");
 			} catch (IOException e) {
-				
+				System.err.println("파일을 찾을 수 있어용!");
 			}
 			}
 
