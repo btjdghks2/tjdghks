@@ -36,7 +36,8 @@ public class BufferedCharStreamEx {
 			bw.close();
 			
 			System.out.println("필터링 완료");
-		}catch (File)
+		}catch (FileNotFoundException e) {
+			System.out.println
 			
 		}
 
