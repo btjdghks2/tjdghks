@@ -13,7 +13,7 @@ public class LangClassTest {
 	
 	
 	// 얕은 복제
-	s2 = s1.getClone();
+	s2 = s1.GetClone();
 	System.out.println("s1= " +s2);
 	
 	// 확인
