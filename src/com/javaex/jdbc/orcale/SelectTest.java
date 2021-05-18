@@ -1,48 +1,44 @@
 package com.javaex.jdbc.orcale;
 
+
 import java.sql.*;
-//departments í…Œì´ë¸”ë¡œë¶€í„° ëª¨ë“  ë ˆì½”ë“œë¥¼ ë¶ˆëŸ¬ì™€ì„œ
-//department _id :department_name  í˜•íƒœì¶œë ¥
-
+//	departments Å×ÀÌºí·ÎºÎÅÍ ¸ğµç ·¹ÄÚµå¸¦ ºÒ·¯¿Í¼­
+//	department_id:department_name ÇüÅÂ Ãâ·Â
 public class SelectTest {
-
+	
 	public static void main(String[] args) {
-		Connenction conn = null;
+		Connection conn = null;
 		Statement stmt = null;
-		ResultSet rs = null; // ë ˆì½”ë“œ ê°ì²´
+		ResultSet rs = null;	//	·¹ÄÚµå °´Ã¼
 		
 		try {
+			//	Ä¿³Ø¼Ç È¹µæ
 			conn = DBConfig.getConnection();
-			//statement ìƒì„±
-			stmt = conn,CreateStatement(); // connection -> statement
-			String sql = "SELECT department_id, department_name" +
-						"FROM departments";
-		rs = stmt.executeQuery(sql) // SELECT -executeQuery -> ResultSet ë°˜í™˜
-		
-		while (rs.next()) {
-			Long deptid = rs.getLong(1); // 1ë²ˆì§¸ ì»¬ëŸ¼ì˜ Long ë°ì´í„°
-			String depatName = rs.getString ("department_name"); // ì»¬ëŸ¼ì˜ í‘œì‹œì´ë¦„ìœ¼ë¡œ ê°’ ë°›ì•„ì˜¤ê¸°
-			
-			System.out.printf("%d:%s%n", deptId, deptName);
-		}
+			//	statement »ı¼º
+			stmt = conn.createStatement();	//	connection -> statement
+			//  Äõ¸® ½ÇÇà
+			String sql = "SELECT department_id, department_name " +
+						" FROM departments";
+			rs = stmt.executeQuery(sql);	//	SELECT - executeQuery -> ResultSet ¹İÈ¯
+			//	°á°ú °´Ã¼ ¹Ş¾Æ¿À±â
+			//	°á°ú Ãâ·Â
+			while (rs.next()) {	//	ÇÑ °³ ·¹ÄÚµå ¹Ş¾Æ¿À±â
+				//	°ª ¹Ş¾Æ¿À±â: ÄÃ·³ÀÇ Å¸ÀÔº° get ¸Ş¼­µå ÀÖÀ½
+				Long deptId = rs.getLong(1);	//	1¹øÂ° ÄÃ·³ÀÇ Long µ¥ÀÌÅÍ
+				String deptName = rs.getString("department_name");	//	ÄÃ·³ÀÇ Ç¥½ÃÀÌ¸§À¸·Î °ª ¹Ş¾Æ¿À±â
+				
+				System.out.printf("%d:%s%n", deptId, deptName);
+			}
 		} catch (SQLException e) {
-			e,printStackTrace();
+			e.printStackTrace();
 		} finally {
 			try {
 				rs.close();
 				stmt.close();
+				conn.close();
+			} catch (Exception e) {
 				
-				
+			}
 		}
-		}
-		
-		
-		//ì»¤ë„¥ì…˜ íšë“
-		//statement ìƒì„±
-		//ì¿¼ë¦¬ ì‹¤í–‰
-		//ê²°ê³¼ ê°ì²´ ë°›ì•„ì˜¤ê¸°
-		//ê²°ê³¼ ì¶œë ¥
-
 	}
-
 }

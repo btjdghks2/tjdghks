@@ -6,67 +6,71 @@ import java.util.Scanner;
 
 import com.sun.jdi.connect.spi.Connection;
 
-import.java.sql*;
-// PreparedStatementë¥¼ í™œìš©í•œ ê¸‰ì—¬ ê²€ìƒ‰ í”„ë¡œê·¸ë¨
-// ì‚¬ìš©ìë¡œë¶€í„° ìµœì†Œ ê¸‰ì—¬ì™€ ìµœëŒ€ ê¸‰ì—¬ë¥¼ ì…ë ¥
-// ê¸‰ì—¬ê°€ ì´ ë²”ìœ„ ë‚´ì— ì†í•˜ëŠ” ì‚¬ì›ì„ ëª©ë¡ ì¶œë ¥
+
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.util.Scanner;
+
+//	PreparedStatement¸¦ È°¿ëÇÑ ±Ş¿© °Ë»ö ÇÁ·Î±×·¥
+//	»ç¿ëÀÚ·ÎºÎÅÍ ÃÖ¼Ò ±Ş¿©¿Í ÃÖ´ë ±Ş¿©¸¦ ÀÔ·Â
+//	±Ş¿©°¡ ÀÌ ¹üÀ§ ³»¿¡ ¼ÓÇÏ´Â »ç¿øÀ» ¸ñ·Ï Ãâ·Â
 public class HRSalaryPstmt {
 
 	public static void main(String[] args) {
-		Connection conn= null;
+		Connection conn = null;
 		PreparedStatement pstmt = null;
-		ResultSet r5 = null;
+		ResultSet rs = null;
 		
 		Scanner scanner = new Scanner(System.in);
-		System.out.print("ìµœì†Œê¸‰ì—¬");
+		System.out.print("ÃÖ¼Ò±Ş¿©:");
 		int minSalary = scanner.nextInt();
-		System.out/print("ìµœëŒ€ê¸‰ì—¬");
+		System.out.print("ÃÖ´ë±Ş¿©:");
 		int maxSalary = scanner.nextInt();
 		
 		if (minSalary > maxSalary) {
-			//ê°’ì„ ë’¤ì§‘ì–´ ì¤€ë‹¤
-			int temp = minSalary
-				minSalary = maxSalaryl
-				maxSalaey = temp
+			//	°ªÀ» µÚÁı¾î ÁØ´Ù
+			int temp = minSalary;
+			minSalary = maxSalary;
+			maxSalary = temp;
 		}
+		
 		scanner.close();
 		
 		try {
-			conn = DBCofing.getConnection();
+			conn = DBConfig.getConnection();
 			
-			// ì‹¤í–‰ ê³„íš ì¤€ë¹„
-			
-			String template = "SELECT first_name ||''|| last_name as name, salary" +
-			"FROM employees WHERE salary BETWEEN ? AND ? ORDER BY salaet DESC"; // ë™ì ìœ¼ë¡œ ì—°ê²°í•  ë°ì´í„° ì˜ì—­? í‘œì‹œ
-			
+			//	½ÇÇà °èÈ¹ ÁØºñ
+			String template = "SELECT first_name || ' ' || last_name as name, salary " +
+					"FROM employees WHERE salary BETWEEN ? AND ? ORDER BY salary DESC";	//	µ¿ÀûÀ¸·Î ¿¬°áÇÒ µ¥ÀÌÅÍ ¿µ¿ª ? Ç¥½Ã
 			pstmt = conn.prepareStatement(template);
-			
-		// ë™ì  ë°ì´í„° ë°”ì¸ë”©
+			//	µ¿Àû µ¥ÀÌÅÍ ¹ÙÀÎµù
 			pstmt.setInt(1, minSalary);
-			pstmt.setInt(2, minSalary);
+			pstmt.setInt(2, maxSalary);
 			
-			// ì¿¼ë¦¬ ìˆ˜í–‰
+			//	Äõ¸® ¼öÇà
 			rs = pstmt.executeQuery();
 			
 			while(rs.next()) {
-				String name = re.getString(1);
+				String name = rs.getString(1);
 				int salary = rs.getInt(2);
 				
-				//ì¶œë ¥
+				//	Ãâ·Â
 				System.out.printf("%s - %d%n", name, salary);
 			}
-		} catch(SQLException e) {
+		} catch (SQLException e) {
 			e.printStackTrace();
-			
 		} finally {
-			rs.close();
-			pstmt.close();
-			conn.close();
-		} catch (Exception e) {
-			
-			
+			try {
+				rs.close();
+				pstmt.close();
+				conn.close();
+			} catch (Exception e) {
+				
 			}
 		}
-
 	}
+
+}
 

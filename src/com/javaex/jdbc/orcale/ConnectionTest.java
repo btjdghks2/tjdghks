@@ -1,37 +1,35 @@
 package com.javaex.jdbc.orcale;
 
-import java.sql.*; //JDNC API
+
+import java.sql.*;	//	JDBC API
 
 public class ConnectionTest {
-
+	
 	public static void main(String[] args) {
-		
 		String dbuser = "hr";
 		String dbpass = "hr";
 		Connection conn = null;
 		
-		// Driver Load
-		Class.forName("oracle.jdbc.driver.OracleDriver");
-		//Connenction 靸濎劚
-		conn= DriverManager.gerConnection(DBConfig.DBURL, //db 鞝戩啀 銋曣赴
-													dbuser,
-													dbpass);
-		System.out.println(conn);
-		System.out.println("鞐瓣舶靹标车!");
-		
-	} catch (ClassNotFoundException e) {
-		System.err.println("霌滊澕鞚措矂 搿滊摐 鞁ろ尐!");
-		catch (SQLException e) {
+		try {
+			// Driver Load
+			Class.forName("oracle.jdbc.driver.OracleDriver");
+			//	Connection 积己
+			conn = DriverManager.getConnection(DBConfig.DBURL,	//	db 立加 url
+												dbuser,
+												dbpass);
+			System.out.println(conn);
+			System.out.println("楷搬 己傍!");
+		} catch (ClassNotFoundException e) {
+			System.err.println("靛扼捞滚 肺靛 角菩!");
+		} catch (SQLException e) {
 			System.err.println("SQLError!");
-			
 		} finally {
 			try {
 				conn.close();
-				
-			} catch (close()  {
+			} catch (Exception e) {
 				e.printStackTrace();
 			}
-		
+		}
 	}
-	}}
 
+}

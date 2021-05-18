@@ -1,50 +1,62 @@
 package com.javaex.jdbc.orcale;
 
-import java.sql.*;
-// Scannerë¡œ í‚¤ì›Œë“œ ì…ë ¥
-// first_name, last_name í•„ë“œ ëŒ€ìƒ ë¶€ë¶„ ê²€ìƒ‰
-// ì´ë¦„ ì„±, Email, ì „í™”ë²ˆí˜¸, ì…ì‚¬ì¼ ì¶œë ¥
+import java.sql.Connection;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Statement;
+import java.util.Date;
 import java.util.Scanner;
 
-public class HRSearchEmploytees {
+//	Scanner·Î Å°¿öµå ÀÔ·Â
+//	first_name, last_name ÇÊµå ´ë»ó ºÎºĞ °Ë»ö
+//	ÀÌ¸§ ¼º, Email, ÀüÈ­¹øÈ£, ÀÔ»çÀÏ Ãâ·Â
+public class HRSearchEmployees {
 
 	public static void main(String[] args) {
-		Connection conn = null;;
-		Statement stmt = null;
-		ResultSet rs =null;
+		Connection conn = null;	//	Ä¿³Ø¼Ç
+		Statement stmt = null;	//	¹®¸Æ
+		ResultSet rs = null;	//	°á°ú ¼Â
 		Scanner scanner = new Scanner(System.in);
 		
 		try {
 			conn = DBConfig.getConnection();
 			
-			System.out.print("ê²€ìƒ‰ì–´:");
+			System.out.print("°Ë»ö¾î:");
 			String keyword = scanner.next();
 			
-			String sql = "SELECT first_name, last_name," +
-			"email,phone_number, hire_date" +
-			"FROM employees" +
-			"WHERE lower(first_name) LIKE '%" + keyword.toLowerCase() + "%OR" +
-			"lower(last_name) Like '"% + keyword.toLowerCase() + "%'";
+			String sql = "SELECT first_name, last_name, " +
+					"email, phone_number, hire_date " +
+					" FROM employees " +
+					" WHERE lower(first_name) LIKE '%" + keyword.toLowerCase() + "%' OR " +
+					" lower(last_name) LIKE '%" + keyword.toLowerCase() + "%'";
+			System.out.println("QUERY:" + sql);
 			
-		System.out.println("QUERY:" sql);
-		
-		stmt = conn.createStatement();
-		// ì¿¼ë¦¬ ìˆ˜í–‰
-		rs = stmt.executeQuery(sql);
-		//Loop
-		while(rs.next()) {
-			String firstName = rs.getString(1);
-			String lastName = rs.getString(2);
-			String email = rs.getString("email");
-			String phoneNumber = rs.getString("phone_number");
-			String hireDate= rs.getDate("hire_date"); // java.util.Date
-			
-			//ì¶œë ¥
-			System.out/printf("%s%s:%s,%s,%s%n",
-					firstName, lastName, email,phone_)
+			stmt = conn.createStatement();
+			//	Äõ¸® ¼öÇà
+			rs = stmt.executeQuery(sql);
+			//	Loop
+			while(rs.next()) {
+				String firstName = rs.getString(1);
+				String lastName = rs.getString(2);
+				String email = rs.getString("email");
+				String phoneNumber = rs.getString("phone_number");
+				String hireDate = rs.getString("hire_date");	
+				
+				//	Ãâ·Â
+				System.out.printf("%s %s: %s, %s, %s%n", 
+						firstName, lastName, email, phoneNumber, hireDate);
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			try {
+				rs.close();
+				stmt.close();
+				conn.close();
+			} catch (Exception e) {
+				
+			}
 		}
-		}
-
 	}
 
 }
